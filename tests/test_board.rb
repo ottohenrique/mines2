@@ -28,9 +28,9 @@ describe 'Board' do
 
   describe 'access a cell' do
     it 'only access valid cells' do
-      board = Board.new([[nil, nil, nil]])
+      board = Board.new([[' ', ' ', ' ']])
 
-      assert_equal true, board.cell(0, 1)
+      assert_equal true, !!board.cell(0, 1)
 
       assert_equal false, board.cell(3, 8)
       assert_equal false, board.cell(-1, -1)

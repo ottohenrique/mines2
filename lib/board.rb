@@ -7,8 +7,6 @@ class Board
 
     @rows = board_state.size
     @cols = board_state.first.size
-
-    sinalize_bombs_on_board
   end
 
   def siblings(x, y)
@@ -38,23 +36,4 @@ class Board
     (x >= 0 && x < @rows) &&
       (y >= 0 && y < @cols)
   end
-
-  def sinalize_bombs_on_board
-    @bombs = 0
-
-    @state.each_with_index do |row, x|
-      row.each_with_index do |col, y|
-        if cell(x, y).value != 'x'
-          bombs = 0
-          siblings(x, y).each do |sibling|
-            bombs += 1 if cell(sibling[0], sibling[1]).value == 'x'
-          end
-          cell(x, y).value = bombs > 0 ? bombs.to_s : ' '
-        else
-          @bombs += 1
-        end
-      end
-    end
-  end
-
 end

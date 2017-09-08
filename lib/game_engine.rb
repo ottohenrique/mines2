@@ -1,11 +1,14 @@
 require File.expand_path('../../lib/board', __FILE__)
+require File.expand_path('../../lib/numbered_board', __FILE__)
 require File.expand_path('../../lib/cell', __FILE__)
 
 class GameEngine
   attr_reader :opened_cells, :cells_count, :flags_count
 
-  def initialize(state)
-    cells = state.map do |row|
+  def initialize(board_config)
+    numbered_board = NumberedBoard.new(board_config)
+
+    cells = numbered_board.state.map do |row|
       row.map do |col|
         Cell.new(col)
       end
@@ -17,6 +20,7 @@ class GameEngine
 
     @opened_cells = 0
     @flags_count = 0
+    @bombs_count = board_config.flatten.count { |el| el == 'x' }
   end
 
   def still_playing?
@@ -53,6 +57,8 @@ class GameEngine
     cell.flag!
     
     @flags_count += cell.flagged? ? 1 : -1
+
+    true
   end
 
   def play!(x, y)
@@ -71,7 +77,7 @@ class GameEngine
       end
 
       @opened_cells += 1
-      if (cells_count - @opened_cells == bombs_count)
+      if (cells_count - @opened_cells == @bombs_count)
         @state = :victory
       end
     else
@@ -83,9 +89,5 @@ class GameEngine
 
   def cells_count
     @board.rows * @board.cols
-  end
-
-  def bombs_count
-    @board.bombs
   end
 end
