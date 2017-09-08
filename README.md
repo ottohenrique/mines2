@@ -27,6 +27,13 @@
 
   Exibe um texto com essa explicação dos comandos
   
+## Testes
+
+Para executar os testes do código:
+
+    ./run_tests.sh
+
+
 ## Gameplay
 
 [![asciicast](https://asciinema.org/a/136782.png)](https://asciinema.org/a/136782)
