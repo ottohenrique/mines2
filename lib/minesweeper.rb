@@ -1,4 +1,4 @@
-require File.expand_path('../lib/game_engine', __FILE__)
+require File.expand_path('../game_engine', __FILE__)
 
 class MinesweeperGame
   def self.new_game(rows, cols, bombs)

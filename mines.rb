@@ -1,4 +1,4 @@
-require './minesweeper'
+require File.expand_path('../lib/minesweeper', __FILE__)
 
 require File.expand_path('../lib/basic_printer', __FILE__)
 require File.expand_path('../lib/pretty_printer', __FILE__)
