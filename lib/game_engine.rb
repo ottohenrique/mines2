@@ -1,6 +1,6 @@
-require File.expand_path('../../lib/board', __FILE__)
-require File.expand_path('../../lib/numbered_board', __FILE__)
-require File.expand_path('../../lib/cell', __FILE__)
+require File.expand_path './lib/board'
+require File.expand_path './lib/numbered_board'
+require File.expand_path './lib/cell'
 
 class GameEngine
   attr_reader :opened_cells, :cells_count, :flags_count

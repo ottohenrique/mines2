@@ -1,4 +1,4 @@
-require File.expand_path('../../lib/board', __FILE__)
+require File.expand_path('./lib/board')
 
 class NumberedBoard < Board
   def initialize(config)
