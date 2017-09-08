@@ -10,7 +10,7 @@ class PrettyPrinter < BasicPrinter
         when '.'
           colorize(36, '.')
         when '?'
-          colorize(33, '?')
+          colorize(35, '?')
         when 'x'
           colorize(31, 'X')
         when ('1'..'8')
