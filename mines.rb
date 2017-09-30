@@ -3,6 +3,8 @@ require File.expand_path('../lib/minesweeper', __FILE__)
 require File.expand_path('../lib/basic_printer', __FILE__)
 require File.expand_path('../lib/pretty_printer', __FILE__)
 
+GAME_SAVE_PATH = './game_state.txt'
+
 def prompt(msg, d = '')
   print msg
   i = STDIN.gets.chomp.downcase
@@ -17,10 +19,12 @@ HELP = <<-HELP
   p: jogar
   f: colocar bandeira
   s: placar
+  w: salvar jogo atual
   q: sair
   ?: ajuda (esse comando)
 HELP
 
+cont = prompt('Deseja carregar um jogo já salvo? (Y/n) > ', 'y')
 
 colors = prompt('Deseja jogar com cores? (Y/n) > ', 'y')
 if colors == 'n'
@@ -29,18 +33,22 @@ else
   @printer = PrettyPrinter
 end
 
-rows = iprompt('Linhas (5) > ', 5)
-cols = iprompt('Colunas (8) > ', 8)
-bombs = iprompt('Bombas (15) > ', 15)
+if cont == 'n'
+    rows = iprompt('Linhas (5) > ', 5)
+    cols = iprompt('Colunas (8) > ', 8)
+    bombs = iprompt('Bombas (15) > ', 15)
 
-game = MinesweeperGame.new_game(rows, cols, bombs)
+    game = MinesweeperGame.new_game(rows, cols, bombs)
+else
+    game = MinesweeperGame.load(GAME_SAVE_PATH)
+end
 
 puts HELP
 
 while game.still_playing?
   @printer.new(game.current_board).print
 
-  c = prompt('comando (P/f/s/q/?) > ', 'p')
+  c = prompt('comando (P/f/s/w/q/?) > ', 'p')
 
   case c
   when 'p', 'f'
@@ -58,6 +66,8 @@ while game.still_playing?
     puts "> bandeiras: #{game.flags_count}"
     puts "> abertas:   #{game.opened_cells}"
     puts "> fechadas:  #{game.cells_count - game.opened_cells}"
+  when 'w'
+    game.save(GAME_SAVE_PATH)
   when 'q'
     exit(1)
   when '?'

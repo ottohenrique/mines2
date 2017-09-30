@@ -17,4 +17,10 @@ class MinesweeperGame
 
     GameEngine.new(board)
   end
+
+  def self.load(path)
+      old_game = Marshal.load(File.read(path))
+
+      GameEngine.load(old_game)
+  end
 end

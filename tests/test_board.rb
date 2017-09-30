@@ -36,4 +36,17 @@ describe 'Board' do
       assert_equal false, board.cell(-1, -1)
     end
   end
+
+  describe 'saving and loading a game' do
+    it 'saves the current state of game' do
+        board = Board.new([1,2,3])
+
+        current_state = board.save
+
+        b2 = Board.load(current_state)
+
+        assert_equal board.state, b2.state
+    end
+  end
+
 end

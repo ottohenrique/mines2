@@ -25,6 +25,14 @@ class Board
     sibls
   end
 
+  def save
+    Marshal.dump @state
+  end
+
+  def self.load(state)
+    Board.new(Marshal.load(state))
+  end
+
   def cell(x, y)
     return false unless valid_cell?(x, y)
 

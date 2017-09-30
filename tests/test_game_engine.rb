@@ -48,5 +48,4 @@ describe GameEngine do
       assert_equal false, game.still_playing?
     end
   end
-
 end
