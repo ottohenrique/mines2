@@ -25,6 +25,12 @@ class Board
     sibls
   end
 
+  def count(&block)
+    @state.flatten.select do |cell|
+      yield cell
+    end.count
+  end
+
   def cell(x, y)
     return false unless valid_cell?(x, y)
 

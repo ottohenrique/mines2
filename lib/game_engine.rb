@@ -3,14 +3,14 @@ require File.expand_path './lib/numbered_board'
 require File.expand_path './lib/cell'
 
 class GameEngine
-  def initialize(board, opened, flags, bombs)
+  def initialize(board)
     @board = Board.new(board)
 
     @state = :running
 
-    @opened_cells = opened
-    @flags_count = flags
-    @bombs_count = bombs 
+    @opened_cells = @board.count { |cell| cell.played? } 
+    @flags_count = @board.count { |cell| cell.flagged? }
+    @bombs_count = @board.count { |cell| cell.value == 'x' }
   end
 
   def still_playing?
