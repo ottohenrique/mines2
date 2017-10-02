@@ -49,4 +49,14 @@ describe GameEngine do
     end
   end
 
+  describe 'game score' do
+    it 'gives a helper method to access scores values' do
+      game = GameEngine.new([[Cell.new(' '), Cell.new('1'), Cell.new('x')]])
+
+      assert_equal 3, game.score[:closed_cells]
+      assert_equal 0, game.score[:opened_cells]
+      assert_equal 0, game.score[:flags]
+    end
+  end
+
 end

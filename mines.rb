@@ -55,9 +55,9 @@ while game.still_playing?
 
     puts "Jogada inválida, jogar novamente" unless valid
   when 's'
-    puts "> bandeiras: #{game.flags_count}"
-    puts "> abertas:   #{game.opened_cells}"
-    puts "> fechadas:  #{game.cells_count - game.opened_cells}"
+    puts "> bandeiras: #{game.score[:flags]}"
+    puts "> abertas:   #{game.score[:opened_cells]}"
+    puts "> fechadas:  #{game.score[:closed_cells]}"
   when 'q'
     exit(1)
   when '?'

@@ -3,8 +3,6 @@ require File.expand_path './lib/numbered_board'
 require File.expand_path './lib/cell'
 
 class GameEngine
-  attr_reader :opened_cells, :cells_count, :flags_count
-
   def initialize(board_config)
     @board = Board.new(board_config)
 
@@ -25,6 +23,14 @@ class GameEngine
 
   def victory?
     @state == :victory
+  end
+
+  def score
+    {
+      opened_cells: @opened_cells,
+      closed_cells: cells_count - @opened_cells,
+      flags: @flags_count
+    }
   end
 
   def current_board
