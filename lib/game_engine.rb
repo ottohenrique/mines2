@@ -8,11 +8,7 @@ class GameEngine
   def initialize(board_config)
     numbered_board = NumberedBoard.new(board_config)
 
-    cells = numbered_board.state.map do |row|
-      row.map do |col|
-        Cell.new(col)
-      end
-    end
+    cells = numbered_board.filled_with_cells
 
     @board = Board.new(cells)
 

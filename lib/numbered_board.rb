@@ -21,4 +21,12 @@ class NumberedBoard < Board
 
     @state
   end
+
+  def filled_with_cells
+    state.map do |row|
+      row.map do |col|
+        Cell.new(col)
+      end
+    end
+  end
 end
