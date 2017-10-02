@@ -36,7 +36,7 @@ class GameEngine
   def save(path)
     file = File.open(path, 'wb')
     
-    current_state = Marshal.dump(score.merge(board: @board.state))
+    current_state = Marshal.dump(@board.state)
 
     file.write(current_state)
     file.close

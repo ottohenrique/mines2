@@ -25,6 +25,6 @@ class MinesweeperGame
     save_game = File.open(path).read
 
     old_game_state = Marshal.load(save_game)
-    GameEngine.new(old_game_state[:board])
+    GameEngine.new(old_game_state)
   end
 end
