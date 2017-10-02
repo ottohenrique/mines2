@@ -18,6 +18,16 @@ class MinesweeperGame
     numbered_board = NumberedBoard.new(board)
     board_config = numbered_board.filled_with_cells
 
-    GameEngine.new(board_config)
+    GameEngine.new(board_config, 0, 0, bombs)
+  end
+
+  def self.load_game(path)
+    save_game = File.open(path).read
+
+    old_game_state = Marshal.load(save_game)
+    GameEngine.new(old_game_state[:board],
+                   old_game_state[:opened_cells],
+                   old_game_state[:flags],
+                   old_game_state[:bombs])
   end
 end

@@ -3,14 +3,14 @@ require File.expand_path './lib/numbered_board'
 require File.expand_path './lib/cell'
 
 class GameEngine
-  def initialize(board_config)
-    @board = Board.new(board_config)
+  def initialize(board, opened, flags, bombs)
+    @board = Board.new(board)
 
     @state = :running
 
-    @opened_cells = 0
-    @flags_count = 0
-    @bombs_count = @board.state.flatten.count { |el| el.value == 'x' }
+    @opened_cells = opened
+    @flags_count = flags
+    @bombs_count = bombs 
   end
 
   def still_playing?
@@ -31,6 +31,15 @@ class GameEngine
       closed_cells: cells_count - @opened_cells,
       flags: @flags_count
     }
+  end
+
+  def save(path)
+    file = File.open(path, 'wb')
+    
+    current_state = Marshal.dump(score.merge(board: @board.state))
+
+    file.write(current_state)
+    file.close
   end
 
   def current_board
