@@ -6,13 +6,13 @@ class BasicPrinter
   end
 
   def print
-    board.each_with_index do |row, i|
-      if i == 0
-        puts header(row.size)
-      end
+    puts header(board.first.size)
 
-      puts "#{x_index(i)} [ #{row.join(' | ')} ]"
+    board.each_with_index do |row, i|
+      puts "#{x_index(i)} [ #{row.join(' | ')} ] #{x_index(i)}"
     end
+
+    puts header(board.first.size)
   end
 
   def header(max_y)
