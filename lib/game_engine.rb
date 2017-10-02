@@ -6,16 +6,13 @@ class GameEngine
   attr_reader :opened_cells, :cells_count, :flags_count
 
   def initialize(board_config)
-
-    cells = board_config
-
-    @board = Board.new(cells)
+    @board = Board.new(board_config)
 
     @state = :running
 
     @opened_cells = 0
     @flags_count = 0
-    @bombs_count = board_config.flatten.count { |el| el.value == 'x' }
+    @bombs_count = @board.state.flatten.count { |el| el.value == 'x' }
   end
 
   def still_playing?
