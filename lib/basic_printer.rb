@@ -17,7 +17,6 @@ class BasicPrinter
 
   def header(max_y)
     "     " + (0..max_y-1).to_a.map { |n| n.to_s.rjust(3) }.join(' ')
-
   end
 
   def x_index(x)
