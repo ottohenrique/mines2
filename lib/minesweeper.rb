@@ -15,6 +15,9 @@ class MinesweeperGame
       end
     end
 
-    GameEngine.new(board)
+    numbered_board = NumberedBoard.new(board)
+    board_config = numbered_board.filled_with_cells
+
+    GameEngine.new(board_config)
   end
 end
